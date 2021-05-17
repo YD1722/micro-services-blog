@@ -21,14 +21,26 @@ app.post('/events', (req, res) => {
     }
 
     if (type === 'commentCreated') {
-        const {id, content, postId} = data;
+        const {id, content, postId, status} = data;
 
         posts[postId].comments.push({
-            id, content
+            id, content, status
         })
     }
 
-    res.send({});
+    if (type === 'commentUpdated') {
+        const {id, postId, ...rest} = data;
+
+        let currentCommentIdx = posts[postId].comments.findIndex((comment) => {
+            return comment.id === id;
+        });
+
+        if (currentCommentIdx > -1) {
+            posts[postId].comments[currentCommentIdx] = {id, postId, ...rest}
+        }
+
+        res.send({});
+    }
 });
 
 app.listen(4002, () => {
