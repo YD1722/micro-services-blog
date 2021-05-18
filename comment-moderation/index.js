@@ -25,11 +25,11 @@ app.post('/events', (req, res) => {
                 moderatedStatus = 'approved';
             }
 
-            console.log(`Moderating finished`, {rest, status: moderatedStatus});
+            console.log(`Moderating finished`, {...rest, status: moderatedStatus});
 
-            axios.post('http://localhost:4001/events', {
+            axios.post('http://localhost:4005/events', {
                 type: 'commentModerated',
-                data: {...rest, status: moderatedStatus}
+                data: {...rest, content, status: moderatedStatus}
             }).catch(err => {
                 console.log(err);
             })

@@ -43,9 +43,22 @@ app.post('/events', async (req, res) => {
     const {type, data} = req.body;
 
     if (type === 'commentModerated') {
-        await axios.post('http://localhost:4002/events', {
+        const {status, id, postId, ...rest} = data;
+        const currentComments = commentsByPostId[postId];
+        const moderatedComment = currentComments.find(comment => {
+            return comment.id === id
+        });
+
+        moderatedComment.status = status;
+
+        await axios.post('http://localhost:4005/events', {
             type: 'commentUpdated',
-            data: data
+            data: {
+                id,
+                postId,
+                status,
+                ...rest
+            }
         })
     }
 
