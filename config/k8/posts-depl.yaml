@@ -16,5 +16,17 @@ spec:
         - name: posts
           image: blog/post:1
           imagePullPolicy: Never
-
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-srv
+spec:
+  selector:
+    app: post
+  ports:
+    - name: post
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
 
