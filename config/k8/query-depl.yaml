@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: posts-depl
+  name: query-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: post
+      app: query
   template:
     metadata:
       labels:
-        app: post
+        app: query
     spec:
       containers:
-        - name: posts
-          image: blog/post:latest
+        - name: query
+          image: blog/query:latest
           imagePullPolicy: Never
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: post-srv
+  name: query-srv
 spec:
   selector:
-    app: post
+    app: query
   ports:
-    - name: post
+    - name: query
       protocol: TCP
-      port: 4000
-      targetPort: 4000
+      port: 4002
+      targetPort: 4002
 

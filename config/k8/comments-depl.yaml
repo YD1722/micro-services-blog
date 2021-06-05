@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: posts-depl
+  name: comments-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: post
+      app: comment
   template:
     metadata:
       labels:
-        app: post
+        app: comment
     spec:
       containers:
-        - name: posts
-          image: blog/post:latest
+        - name: comment
+          image: blog/comment:latest
           imagePullPolicy: Never
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: post-srv
+  name: comment-srv
 spec:
   selector:
-    app: post
+    app: comment
   ports:
-    - name: post
+    - name: comment
       protocol: TCP
-      port: 4000
-      targetPort: 4000
+      port: 4001
+      targetPort: 4001
 
