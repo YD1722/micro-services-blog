@@ -1,13 +1,13 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: ingress-dtv
+  name: ingress-srv
   annotations:
     # use the shared ingress-nginx
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    - host: post.com
+    - host: posts.com
       http:
         paths:
           - path: /posts

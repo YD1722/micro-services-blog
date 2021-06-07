@@ -1,4 +1,4 @@
-cd config/k8
+cd config/k8 || exit
 
 kubectl apply -f posts-depl.yaml
 kubectl apply -f comments-depl.yaml
