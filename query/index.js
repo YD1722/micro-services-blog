@@ -54,11 +54,15 @@ app.listen(4002, async () => {
     console.log('Query service listening on 4002');
     console.log('Getting all events from event-bus');
 
-    const res = await axios.get('http://event-bus-srv:4005/events');
+    try {
+        const res = await axios.get('http://event-bus-srv:4005/events');
 
-    if (res && res.data) {
-        res.data.forEach(event => {
-            handleEvent(event.type, event.data);
-        });
+        if (res && res.data) {
+            res.data.forEach(event => {
+                handleEvent(event.type, event.data);
+            });
+        }
+    } catch (e) {
+        console.log(`Getting all events from event-bus failed : ${e}`);
     }
 });
