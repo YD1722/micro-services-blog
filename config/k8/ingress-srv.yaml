@@ -10,7 +10,20 @@ spec:
     - host: posts.com
       http:
         paths:
-          - path: /posts
+          - path: /posts/create
             backend:
               serviceName: post-srv
               servicePort: 4000
+          - path: /posts
+            backend:
+              serviceName: query-srv
+              servicePort: 4002
+          - path: /posts/(.*)/comments
+            backend:
+              serviceName: comment-srv
+              servicePort: 4001
+          - path: /
+            backend:
+              serviceName: client-srv
+              servicePort: 3000
+

@@ -1,6 +1,9 @@
 eval $(minikube -p minikube docker-env)
 
-cd posts
+cd client
+docker build -t blog/client .
+
+cd ../posts
 docker build -t blog/post .
 
 cd ../query
